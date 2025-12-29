@@ -1,0 +1,30 @@
+name: 部署到 GitHub Pages
+
+on:
+  push:
+    branches: [ main ] # 只有当 main 分支有代码提交时才触发
+
+jobs:
+  deploy-to-github-pages:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 检出代码
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. 安装 .NET SDK (根据你的项目版本修改，如 8.0)
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # 3. 发布项目 
+      - name: Publish 
+        run: dotnet publish  /PublishBlazorWASMToGithubPageDemo -c Release -o release
+
+      # 4. 部署到 GitHub Pages 分支
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: release/wwwroot # 这是发布后的静态文件所在目录
+          branch: gh-pages        # 部署到的目标分支
