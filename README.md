@@ -17,8 +17,12 @@ name: 部署到 GitHub Pages
 
 on:
   push:
-    branches: [ main ] # 只有当 main 分支有代码提交时才触发
-
+    branches: [ master ] # 只有当 main 分支有代码提交时才触发
+    
+# 设置权限：允许 Action 向仓库写入内容（部署到 gh-pages 分支需要此权限）
+permissions:
+  contents: write
+  
 jobs:
   deploy-to-github-pages:
     runs-on: ubuntu-latest
@@ -27,15 +31,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 2. 安装 .NET SDK (根据你的项目版本修改，如 8.0)
+      # 2. 安装 .NET SDK 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '10.0.x'
 
       # 3. 发布项目 
       - name: Publish 
-        run: dotnet publish  /PublishBlazorWASMToGithubPageDemo -c Release -o release
+        run: dotnet publish  PublishBlazorWASMToGithubPageDemo -c Release -o release
 
       # 4. 部署到 GitHub Pages 分支
       - name: Deploy
@@ -45,7 +49,7 @@ jobs:
           branch: gh-pages        # 部署到的目标分支
 ```
 4. Open github-pages in your repository interface.
-5. Visit your github pags and type  f12 for checking errors.
+5. Visit your github pags([DemoWebsite](https://0use.net/PublishBlazorWASMToGithubPageDemo/)) and type  f12 for checking errors.
 
 #### End
 Thanks for your reading,if you have any problems,just let me know.
