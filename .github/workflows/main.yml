@@ -2,7 +2,7 @@ name: 部署到 GitHub Pages
 
 on:
   push:
-    branches: [ main ] # 只有当 main 分支有代码提交时才触发
+    branches: [ master ] # 只有当 main 分支有代码提交时才触发
 
 jobs:
   deploy-to-github-pages:
