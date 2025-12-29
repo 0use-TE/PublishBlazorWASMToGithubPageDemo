@@ -20,7 +20,7 @@ jobs:
 
       # 3. 发布项目 
       - name: Publish 
-        run: dotnet publish  /PublishBlazorWASMToGithubPageDemo -c Release -o release
+        run: dotnet publish  PublishBlazorWASMToGithubPageDemo -c Release -o release
 
       # 4. 部署到 GitHub Pages 分支
       - name: Deploy
