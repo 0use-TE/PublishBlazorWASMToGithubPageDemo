@@ -3,7 +3,11 @@ name: 部署到 GitHub Pages
 on:
   push:
     branches: [ master ] # 只有当 main 分支有代码提交时才触发
-
+    
+# 设置权限：允许 Action 向仓库写入内容（部署到 gh-pages 分支需要此权限）
+permissions:
+  contents: write
+  
 jobs:
   deploy-to-github-pages:
     runs-on: ubuntu-latest
